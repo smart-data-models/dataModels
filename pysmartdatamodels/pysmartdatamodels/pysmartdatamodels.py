@@ -1144,6 +1144,7 @@ def ngsi_ld_example_generator_str(schema: str, dataModel: str, subject: str):
     output = {}
     fullDict = {}
     # echo("payload", payload)
+    fullDict['id'] = {}
     if "allOf" in payload:
         for index in range(len(payload["allOf"])):
             if "properties" in payload["allOf"][index]:
