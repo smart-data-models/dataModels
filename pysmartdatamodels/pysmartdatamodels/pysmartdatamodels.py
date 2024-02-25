@@ -1120,10 +1120,31 @@ def ngsi_ld_example_generator(schema_url: str):
     payload = open_jsonref(schema_url)
     if payload == "": return False
 
+    return ngsi_ld_example_generator_str(payload, dataModel, subject)
+
+def ngsi_ld_example_generator_str(schema: str, dataModel: str, subject: str):
+    """It returns a fake normalized ngsi-ld format example based on the given json schema
+    Parameters:
+        schema: schema.json contents
+        dataModel: repo name
+        subject: model name
+
+    Returns:
+        if the input parameter exists and the json schema is a valide json:
+            a fake normalized ngsi-ld format example stored in dictionary format
+        if there's any problem related to input parameter and json schema:
+            False
+    """
+
+    payload = json.loads(schema)
+    if payload == "":
+        return False
+
     # print(payload["allOf"])
     output = {}
     fullDict = {}
     # echo("payload", payload)
+    fullDict['id'] = {}
     if "allOf" in payload:
         for index in range(len(payload["allOf"])):
             if "properties" in payload["allOf"][index]:
@@ -1159,7 +1180,7 @@ def ngsi_ld_example_generator(schema_url: str):
         else:
             output = {**output, **{prop: parsedProperty}}
         # echo("output", output)
-    output["@context"] = [create_context(subject)]
+    output["@context"] = [create_context('dataModel.' + dataModel)]
     # print("======================")
     # print(json.dumps(output))
 

@@ -356,6 +356,19 @@ print(sdm.update_broker(dataModel, subject, attribute, value, serverUrl=serverUr
           if there's any problem related to input parameter and json schema:
               False
 
+Function ngsi_ld_example_generator_str(schema: str, dataModel: str, subject: str)
+
+        It returns a fake normalized ngsi-ld format example based on the given json schema
+            Parameters:
+                schema: schema.json contents
+                dataModel: repo name
+                subject: model name
+
+            Returns:
+                if the input parameter exists and the json schema is a valide json:
+                    a fake normalized ngsi-ld format example stored in dictionary format
+                if there's any problem related to input parameter and json schema:
+                    False
 
 18- Return a fake key value ngsi-ld format example. Function ngsi_ld_keyvalue_example_generator(schemaUrl)
 
