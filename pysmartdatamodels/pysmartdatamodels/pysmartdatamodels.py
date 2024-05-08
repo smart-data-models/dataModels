@@ -1139,6 +1139,7 @@ def ngsi_ld_example_generator_str(schema: str, dataModel: str, subject: str):
     if dataModel == "" or subject == "":
         return False
 
+    output = {}
     tz = pytz.timezone("Europe/Madrid")
 
     try:
@@ -1155,7 +1156,6 @@ def ngsi_ld_example_generator_str(schema: str, dataModel: str, subject: str):
         return False
 
     # print(payload["allOf"])
-    output = {}
     fullDict = {}
     # echo("payload", payload)
     fullDict['id'] = {}
