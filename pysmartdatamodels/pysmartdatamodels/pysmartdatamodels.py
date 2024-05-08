@@ -1136,7 +1136,21 @@ def ngsi_ld_example_generator_str(schema: str, dataModel: str, subject: str):
             False
     """
 
-    payload = json.loads(schema)
+    if dataModel == "" or subject == "":
+        return False
+
+    tz = pytz.timezone("Europe/Madrid")
+
+    try:
+        payload = json.loads(schema)
+    except ValueError:
+        output["result"] = False
+        output["cause"] = "Schema parameter value is not a valid json"
+        output["time"] = str(datetime.datetime.now(tz=tz))
+        # output["parameters"] = {"schema_url: ": schema_url}
+        print(json.dumps(output))
+        sys.exit()
+
     if payload == "":
         return False
 
